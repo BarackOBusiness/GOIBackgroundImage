@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace ImageBackground;
 
-[BepInPlugin("goi.ext.imagebackground", "Background Image", "0.1.0")]
+[BepInPlugin("goi.ext.imagebackground", "Background Image", "1.0.0")]
 public class ImageBackground : BaseUnityPlugin
 {
     private ConfigEntry<string> imagePath;
