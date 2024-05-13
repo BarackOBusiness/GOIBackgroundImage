@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using BepInEx;
 using BepInEx.Configuration;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace ImageBackground;
 
-[BepInPlugin("goi.ext.imagebackground", "Background Image", "1.0.1")]
+[BepInPlugin("goi.ext.imagebackground", "Background Image", "1.0.2")]
 public class ImageBackground : BaseUnityPlugin
 {
     public ConfigEntry<string> imagePath;
@@ -51,7 +52,11 @@ public class ImageBackground : BaseUnityPlugin
         background.sizeDelta = new Vector2(Screen.width, Screen.height);
 
         Image backgroundImage = background.GetComponent<Image>();
-        backgroundImage.sprite = LoadImageToSprite();
+        try {
+            backgroundImage.sprite = LoadImageToSprite();
+        } catch (Exception err) {
+            Logger.LogError($"Error on applying background image: {err}");
+        }
     }
 
     private Sprite LoadImageToSprite() {
